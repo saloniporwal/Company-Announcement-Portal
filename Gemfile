@@ -70,3 +70,4 @@ gem 'devise'
 gem 'jwt'
 gem "byebug", "~> 11.1"
 gem 'rubocop', require: false
+gem 'active_model_serializers'

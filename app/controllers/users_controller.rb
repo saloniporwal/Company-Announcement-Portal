@@ -28,31 +28,7 @@ class UsersController < ApplicationController
   def show
     begin
       @user = User.find(params[:id])
-
-      if @user.id == @current_user.id
-        # Show full details for the current user
-        render json: {
-          id: @user.id,
-          first_name: @user.first_name,
-          last_name: @user.last_name,
-          dob: @user.dob,
-          address: @user.address,
-          mobile_number: @user.mobile_number,
-          gender: @user.gender,
-          email: @user.email,
-          message: "This is your profile."
-        }, status: :ok
-      else
-        # Show limited details for other users
-        render json: {
-          id: @user.id,
-          first_name: @user.first_name,
-          last_name: @user.last_name,
-          gender: @user.gender,
-          email: @user.email,
-          message: "This is another user's profile."
-        }, status: :ok
-      end
+      render json: @user, serializer: UserSerializer, current_user_id: @current_user.id, status: :ok
     rescue ActiveRecord::RecordNotFound
       render json: { message: "User not found" }, status: :not_found
     end
