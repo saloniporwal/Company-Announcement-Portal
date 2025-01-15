@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_one_attached :image 
-  has_many :comments, dependent: :destroy
+  has_one_attached :image
+  has_many :comments, as: :commentable, dependent: :destroy # Comments on the user's profile
 
   validates :content, presence: true, unless: -> { image.attached? }
   validate :content_or_image_present

@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   post 'register', to: 'users#register'
   post 'login', to: 'users#login'
   get 'users/:id', to: 'users#show'
-  resources :posts
 
   resources :posts do
-    resources :comments, only: [:create, :index]
+    resources :comments, only: [:create, :show,:index]
+  end  
+
+  resources :users do
+    resources :comments, only: [:create, :show,:index]
   end
-end
+end 
